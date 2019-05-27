@@ -1,82 +1,116 @@
-import java.util.Scanner;
-
-public class Main {
-//    static int[] distances = new int[20];
-//    static int[] visited = new int[20];
+//public class Main {
+//    final int V = 5;
+//    int path[];
 //
-//    public static int findmin() {
-//        int i, n, min = 0;
-//        Scanner in = new Scanner(System.in);
-//        n = in.nextInt();
-//        for (i = 1; i <= n; i++) {
-//            if (visited[i] == 0) {
-//                min = i;
-//                break;
-//            }
-//        }
-//        for (i = 1; i <= n; i++) {
-//            if (distances[i] < distances[min] && visited[i] == 0)
-//                min = i;
-//        }
-//        return min;
+//    /* A utility function to check if the vertex v can be added at index 'pos'in the Hamiltonian
+//       Cycle constructed so far (stored in 'path[]') */
+//
+//    boolean isSafe(int v, int graph[][], int path[], int pos) {
+//        /* Check if this vertex is an adjacent vertex of the previously added vertex. */
+//        if (graph[path[pos - 1]][v] == 0)
+//            return false;
+//
+///* Check if the vertex has already been included.This step can be optimized by creating
+//an arrayof size V */
+//        for (int i = 0; i < pos; i++)
+//            if (path[i] == v)
+//                return false;
+//        return true;
 //    }
 //
-//    public void dijkstra(int src, int[][] cost, int n) {
-//        int[] previous = new int[20];
-//        for (int i = 1; i <= n; i++) {
-//            visited[i] = 0;
-//            distances[i] = 999;
-//            previous[i] = 0;
-//        }
-//        distances[src] = 0;
-//        for (int i = 1; i <= n; i++) {
-//            int min = findmin();
-//            visited[min] = 1;
-//            for (int other = 1; other <= n; other++) {
-//                if (cost[min][other] != 999 && visited[other] == 0) {
-//                    if (distances[other] > distances[min] + cost[min][other]) {
-//                        distances[other] = distances[min] + cost[min][other];
-//                        previous[other] = min;
-//                    }
-//                }
-//            }
-//        }
-//        System.out.println("shortest path costs\n");
-//        for (int i = 1; i <= n; i++) {
-//            if (distances[i] == 999)
-//                System.out.println("sorry!  no path for source" + src + "to" + i + "vertex");
+//    /* A recursive utility function to solve hamiltonian cycle problem */
+//    boolean hamCycleUtil(int graph[][], int path[], int pos) {
+//        /* base case: If all vertices are included in Hamiltonian Cycle */
+//        if (pos == V) {
+//            // And if there is an edge from the last included
+//            // vertex to the first vertex
+//            if (graph[path[pos - 1]][path[0]] == 1)
+//                return true;
 //            else
-//                System.out.println("path cost from" + src + "to" + i + "is:" + distances[i] + "\n");
+//                return false;
 //        }
-//        System.out.println("shortest group of paths are\n");
-//        for (int i = 1; i <= n; i++) {
-//            if (i != src && distances[i] != 999) {
-//                System.out.print(i);
-//                int j = previous[i];
-//                while (previous[j] != 0) {
-//                    System.out.println("<----" + j + " ");
-//                    j = previous[j];
-//                }
-//                System.out.println("<----" + src + "\n");
+//
+//
+//        /* Try different vertices as a next candidate in Hamiltonian Cycle. We don't try for 0 as
+//           We included 0 as starting point in hamCycle() */
+//        for (int v = 1; v < V; v++) {
+//            /* Check if this vertex can be added to Hamiltonian Cycle */
+//            if (isSafe(v, graph, path, pos)) {
+//                path[pos] = v;
+//                /* recur to construct rest of the path */
+//                if (hamCycleUtil(graph, path, pos + 1) == true)
+//                    return true;
+//                /* If adding vertex v doesn't lead to a solution,then remove it */
+//                path[pos] = -1;
 //            }
 //        }
+//        /* If no vertex can be added to Hamiltonian Cycle constructed so far, then return false */
+//        return false;
+//    }
+// /* This function solves the Hamiltonian Cycle problem using Backtracking. It mainly uses
+// hamCycleUtil() to solve the problem. It returns false if there is no Hamiltonian Cycle
+//possible, otherwise return true and prints the path.Please note that there may be more
+//   than one solutions this function prints one of the feasible solutions. */
+//
+//    int hamCycle(int graph[][]) {
+//        path = new int[V];
+//        for (int i = 0; i < V; i++)
+//            path[i] = -1;
+//
+//        /* Let us put vertex 0 as the first vertex in the path.If there is a Hamiltonian Cycle,
+// then the path can be started from any point of the cycle as the graph is undirected */
+//
+//        path[0] = 0;
+//        if (hamCycleUtil(graph, path, 1) == false) {
+//            //System.out.println("\nSolution does not exist");
+//            return 0;
+//        }
+//        printSolution(path);
+//        return 1;
 //    }
 //
-//    public static void main(String args[]) {
-//        int i, j, n, v;
-//        int w[][] = new int[50][50];
-//        Dijikstra d1 = new Dijikstra();
-//        Scanner in = new Scanner(System.in);
-//        System.out.println("enter the number of vertices\n");
-//        n = in.nextInt();
-//        System.out.println("enter the cost of vertices\n");
-//        for (i = 1; i <= n; i++)
-//            for (j = 1; j <= n; j++) {
-//                w[i][j] = in.nextInt();
-//            }
-//        System.out.println("enter the source vertex\n");
-//        v = in.nextInt();
-//        /* call Dijkstra method */
-//        d1.dijkstra(v, w, n);
+//    /* A utility function to print solution */
+//    void printSolution(int path[]) {
+//        System.out.println("Solution Exists: Following" + " is one Hamiltonian Cycle");
+//        for (int i = 0; i < V; i++)
+//            System.out.print(" " + path[i] + " ");
+//
+//        // Let us print the first vertex again to show the
+//        // complete cycle
+//        System.out.println(" " + path[0] + " ");
 //    }
-}
+//
+//    // driver program to test above function
+//    public static void main(String args[]) {
+//        Hamiltonian hamiltonian = new Hamiltonian();
+//        /* Let us create the following graph
+//           (0)--(1)--(2)
+//            |   / \   |
+//            |  /   \  |
+//            | /     \ |
+//           (3)-------(4)    */
+//        int graph1[][] = {{0, 1, 0, 1, 0},
+//                {1, 0, 1, 1, 1},
+//                {0, 1, 0, 0, 1},
+//                {1, 1, 0, 0, 1},
+//                {0, 1, 1, 1, 0},
+//        };
+//        // Print the solution
+//        hamiltonian.hamCycle(graph1);
+//        /* Let us create the following graph
+//           (0)--(1)--(2)
+//            |   / \   |
+//            |  /   \  |
+//            | /     \ |
+//           (3)       (4)    */
+//        r
+//        int graph2[][] = {{0, 1, 0, 1, 0},
+//                {1, 0, 1, 1, 1},
+//                {0, 1, 0, 0, 1},
+//                {1, 1, 0, 0, 0},
+//                {0, 1, 1, 0, 0},
+//        };
+//        // Print the solution
+//        hamiltonian.hamCycle(graph2);
+//    }
+//}

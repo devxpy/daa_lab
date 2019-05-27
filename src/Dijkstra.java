@@ -1,17 +1,17 @@
 public class Dijkstra {
     int inf = 999;
-//    int[][] cost = {
-//            {0, 7, 3, inf, inf},
-//            {7, 0, 1, 2, 6},
-//            {3, 1, 0, 2, inf},
-//            {inf, 2, 2, 0, 4},
-//            {inf, 6, inf, 4, 0},
-//    };
     int[][] cost = {
-        {inf, 2, 3},
-        {2, inf, 4},
-        {3, 4, inf}
+            {0, 7, 3, inf, inf},
+            {7, 0, 1, 2, 6},
+            {3, 1, 0, 2, inf},
+            {inf, 2, 2, 0, 4},
+            {inf, 6, inf, 4, 0},
     };
+//    int[][] cost = {
+//        {inf, 2, 3},
+//        {2, inf, 4},
+//        {3, 4, inf}
+//    };
     int src = 0, n = cost.length;
     int[] prev, dist;
     boolean[] visited;
@@ -50,18 +50,19 @@ public class Dijkstra {
 
     void dijkstra() {
         while (true) {
-            int min = findNextMin();
-            if (min == -1) break;
+            int cur = findNextMin();
+            if (cur == -1) break;
 
-            visited[min] = true;
+            visited[cur] = true;
 
             for (int near = 0; near < n; near++) {
-                if (visited[near] || cost[min][near] == inf) continue;
+                if (visited[near] || cost[cur][near] == inf) continue;
 
-                int newCost = dist[min] + cost[min][near];
+                int newCost = dist[cur] + cost[cur][near];
+
                 if (newCost < dist[near]) {
                     dist[near] = newCost;
-                    prev[near] = min;
+                    prev[near] = cur;
                 }
             }
         }

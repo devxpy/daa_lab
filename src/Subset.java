@@ -1,13 +1,13 @@
 public class Subset {
-    static int[] set = {1, 5, 7, 2};
-    static boolean[] taken = new boolean[4];
-    static int sum = 0, count = 0, target = 8;
+    int[] set = {68, 636, 1, 747, 858, 8, 1};
+    boolean[] taken = new boolean[set.length];
+    int sum = 0, count = 0, target = 2;
 
-    static void subset() {
+    void subset() {
         subset(0, 0);
     }
 
-    static void subset(int sol, int index) {
+    void subset(int sol, int index) {
         if (index >= set.length) return;
 
         int newIndex = index + 1;
@@ -34,11 +34,12 @@ public class Subset {
     }
 
     public static void main(String[] args) {
-        for (int it : set) {
-            sum += it;
+        Subset obj = new Subset();
+        for (int it : obj.set) {
+            obj.sum += it;
         }
-        subset();
-        if (count == 0) {
+        obj.subset();
+        if (obj.count == 0) {
             System.out.println("No Solution!");
         }
     }
