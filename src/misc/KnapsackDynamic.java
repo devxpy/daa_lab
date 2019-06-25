@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class KnapsackDynamic {
     int[] profits = {0, 3, 45, 4, 3};
     int[] weights = {0, 1, 1, 1, 1};
@@ -11,6 +13,7 @@ public class KnapsackDynamic {
 
     int run(int num, int remaining) {
         int result;
+
 
         if (num == 0 || remaining == 0) {
             result = 0;
