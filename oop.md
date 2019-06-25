@@ -38,11 +38,11 @@
 ## Typecasting
 
 ```
-				 --> widening (implicit) -->				
+            --> widening (implicit) -->				
 
 byte -> short -> int -> long -> float -> double
 
-			   <— narrowing (explicit) <--	
+            <— narrowing (explicit) <--	
 ```
 
 ```java
@@ -61,15 +61,15 @@ int z = (int) x
 
 ```java
 <APPLET
-  CODE = appleFile
-  WIDTH = pixels
-  HEIGHT = pixels
-	[CODEBASE = codebaseUrl]
-  [ALT = alternateText]
-  [NAME = name]
-  [ALIGN = alignment]
-  [VSPACE = pixels]
-  [HSPACE = pixels]
+    CODE = appleFile
+    WIDTH = pixels
+    HEIGHT = pixels
+    [CODEBASE = codebaseUrl]
+    [ALT = alternateText]
+    [NAME = name]
+    [ALIGN = alignment]
+    [VSPACE = pixels]
+    [HSPACE = pixels]
 >
 
 [<PARAM NAME=apletParam1 VALUE=appletValue1>]
