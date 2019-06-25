@@ -82,7 +82,7 @@ int z = (int) x
 
 ## Events
 
-###key events
+### key events
 
 `for i in [press, release, type]: "KEY_{i}ED"`
 
@@ -116,7 +116,7 @@ MouseEvent(Component src, int type, float when, int modifiers,
 
 - lightweight containers, like - `JPanel` -  They _do_ inherit from `JComponent`
 
-##uses of super
+## uses of super
 
 - to call superclass constructor
 - to access hidden attributes of superclass
