@@ -1,9 +1,11 @@
+package misc;
+
 import javax.swing.*;
 import java.awt.event.*;
 
 public class selector {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("selector");
+        JFrame frame = new JFrame("misc.selector");
 
         JLabel label = new JLabel("select a language, and press show");
         label.setBounds(10, 100, 500, 100);

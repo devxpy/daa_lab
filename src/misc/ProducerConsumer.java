@@ -1,3 +1,5 @@
+package misc;
+
 class Queue {
     int value = -1;
     boolean valueSet = false;

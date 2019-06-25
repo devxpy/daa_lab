@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package misc;
 
 public class KnapsackDynamic {
     int[] profits = {0, 3, 45, 4, 3};
